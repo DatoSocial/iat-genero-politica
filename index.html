@@ -9,7 +9,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -20,7 +20,7 @@
         .container {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             padding: 50px;
             max-width: 900px;
             width: 100%;
@@ -32,14 +32,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        h1 { color: #667eea; margin-bottom: 30px; text-align: center; font-size: 2em; }
+        h1 { color: #2c3e50; margin-bottom: 30px; text-align: center; font-size: 2em; }
         
         .section { display: none; }
         .section.active { display: block; }
         
         .progress-bar {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: #e0e0e0;
             border-radius: 10px;
             margin-bottom: 30px;
@@ -48,19 +48,20 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
             width: 0%;
             transition: width 0.3s ease;
         }
         
         .consent-text { line-height: 1.8; color: #555; margin-bottom: 25px; }
-        .consent-text h3 { color: #667eea; margin-top: 25px; margin-bottom: 10px; }
+        .consent-text h3 { color: #2c3e50; margin-top: 25px; margin-bottom: 10px; }
         
         .checkbox-group {
             margin: 25px 0;
             padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
+            border: 2px solid #e0e0e0;
         }
         
         .checkbox-group label {
@@ -97,11 +98,11 @@
         
         input:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #2c3e50;
         }
         
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -114,7 +115,7 @@
         
         button:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 20px rgba(44, 62, 80, 0.4);
         }
         
         button:disabled {
@@ -126,15 +127,16 @@
         .btn-container { text-align: center; margin-top: 40px; }
         
         .instructions {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #f8f9fa;
             padding: 30px;
             border-radius: 10px;
             margin-bottom: 25px;
             line-height: 1.8;
+            border: 2px solid #e0e0e0;
         }
         
         .instructions h3 {
-            color: #667eea;
+            color: #2c3e50;
             margin-bottom: 15px;
         }
         
@@ -149,7 +151,7 @@
             width: 100%;
             height: 600px;
             background: white;
-            border: 2px solid #e0e0e0;
+            border: 3px solid #2c3e50;
             border-radius: 10px;
             position: relative;
             display: flex;
@@ -160,7 +162,8 @@
             display: flex;
             justify-content: space-between;
             padding: 30px 50px;
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 3px solid #2c3e50;
+            background: #f8f9fa;
         }
         
         .iat-category {
@@ -169,8 +172,21 @@
             text-align: center;
         }
         
-        .iat-category.left { color: #667eea; }
-        .iat-category.right { color: #764ba2; }
+        .iat-category.left { 
+            color: #2c3e50; 
+            border: 3px solid #2c3e50;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .iat-category.right { 
+            color: #34495e; 
+            border: 3px solid #34495e;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: white;
+        }
         
         .iat-stimulus-area {
             flex: 1;
@@ -178,19 +194,21 @@
             justify-content: center;
             align-items: center;
             padding: 40px;
+            background: white;
         }
         
         .iat-stimulus img {
             max-width: 300px;
             max-height: 300px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 3px solid #2c3e50;
         }
         
         .iat-stimulus .word {
-            font-size: 36px;
+            font-size: 42px;
             font-weight: bold;
-            color: #333;
+            color: #2c3e50;
         }
         
         .iat-error {
@@ -198,17 +216,32 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 80px;
-            color: red;
+            font-size: 100px;
+            color: #e74c3c;
             font-weight: bold;
             display: none;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+        }
+        
+        .iat-correct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            color: #27ae60;
+            font-weight: bold;
+            display: none;
+            text-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
         }
         
         .iat-footer {
             padding: 20px;
             text-align: center;
-            border-top: 2px solid #e0e0e0;
-            color: #666;
+            border-top: 3px solid #2c3e50;
+            color: #2c3e50;
+            font-weight: 600;
+            background: #f8f9fa;
         }
         
         .iat-instructions {
@@ -217,23 +250,115 @@
             background: #f8f9fa;
             margin-bottom: 20px;
             border-radius: 10px;
+            border: 2px solid #2c3e50;
+            font-weight: 600;
+            color: #2c3e50;
         }
         
+        /* Pantalla entre bloques */
+        .block-break {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .block-break.active {
+            display: block;
+        }
+        
+        .block-break h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        
+        .block-break .message {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #2c3e50;
+        }
+        
+        .block-break .emphasis {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+        
+        /* Resultados */
         .result-box {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #f8f9fa;
             padding: 40px;
             border-radius: 15px;
             margin-top: 30px;
             text-align: center;
+            border: 3px solid #2c3e50;
         }
         
         .result-box h2 {
-            color: #667eea;
+            color: #2c3e50;
             margin-bottom: 25px;
+            font-size: 2em;
+        }
+        
+        .result-box .score-display {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 3px solid #2c3e50;
+        }
+        
+        .result-box .score-label {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .result-box .score-value {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0;
+        }
+        
+        .result-box .interpretation {
+            font-size: 1.3em;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 20px;
+            background: #e8f4f8;
+            border-radius: 8px;
+            border: 2px solid #2c3e50;
+        }
+        
+        .result-box .explanation {
+            margin-top: 30px;
+            line-height: 1.8;
+            color: #555;
+            text-align: left;
+        }
+        
+        /* Precarga de imágenes */
+        .preload-images {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
         }
     </style>
 </head>
 <body>
+    <!-- Precarga de imágenes -->
+    <div class="preload-images" id="preload"></div>
+    
     <div class="container">
         <div class="progress-bar">
             <div class="progress-fill" id="progress"></div>
@@ -326,8 +451,10 @@
                 <ul>
                     <li>✅ Responda lo más <strong>rápido posible</strong></li>
                     <li>✅ Minimice errores</li>
-                    <li>✅ Si se equivoca, verá una "X" roja - presione la tecla correcta</li>
+                    <li>✅ Si acierta, verá un "✓" verde brevemente</li>
+                    <li>✅ Si se equivoca, verá una "✗" roja - presione la tecla correcta</li>
                     <li>✅ Las categorías cambiarán - preste atención</li>
+                    <li>✅ Habrá pausas entre bloques para descansar</li>
                     <li>✅ Duración: <strong>12-15 minutos</strong></li>
                 </ul>
             </div>
@@ -337,7 +464,19 @@
             </div>
         </div>
         
-        <!-- SECCIÓN 4: IAT -->
+        <!-- SECCIÓN 4: PANTALLA ENTRE BLOQUES -->
+        <div id="block-break-section" class="section">
+            <div class="block-break active">
+                <h2 id="break-title"></h2>
+                <div class="message" id="break-message"></div>
+                <div class="emphasis" id="break-emphasis"></div>
+                <div class="btn-container">
+                    <button id="continue-btn">Continuar →</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN 5: IAT -->
         <div id="iat-section" class="section">
             <div class="iat-instructions" id="block-instructions"></div>
             
@@ -352,6 +491,7 @@
                 </div>
                 
                 <div class="iat-error" id="error-x">✗</div>
+                <div class="iat-correct" id="correct-check">✓</div>
                 
                 <div class="iat-footer">
                     Presione <strong>E</strong> para IZQUIERDA o <strong>I</strong> para DERECHA
@@ -359,17 +499,35 @@
             </div>
         </div>
         
-        <!-- SECCIÓN 5: RESULTADOS -->
+        <!-- SECCIÓN 6: RESULTADOS -->
         <div id="results-section" class="section">
-            <h1>✅ ¡Completado!</h1>
+            <h1>✅ ¡Test Completado!</h1>
             
             <div class="result-box">
                 <h2>🎉 Gracias por su participación</h2>
-                <p style="font-size: 1.2em; margin-top: 20px;">Sus datos han sido registrados exitosamente.</p>
                 
-                <div style="margin-top: 30px; line-height: 1.8; color: #555;">
-                    <p>Sus respuestas contribuirán a la investigación científica sobre cognición social y asociaciones implícitas.</p>
-                    <p style="margin-top: 20px;"><strong>Nota:</strong> El IAT mide tendencias grupales y no es diagnóstico individual.</p>
+                <div class="score-display">
+                    <div class="score-label">Su D-score (Puntaje de Asociación Implícita):</div>
+                    <div class="score-value" id="final-dscore">--</div>
+                    <div class="interpretation" id="final-interpretation">--</div>
+                </div>
+                
+                <div class="explanation">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">¿Qué significa este puntaje?</h3>
+                    
+                    <p style="margin-bottom: 15px;"><strong>D-score:</strong> Es una medida estandarizada de la diferencia en tiempo de reacción entre las dos tareas combinadas del IAT. Varía típicamente entre -2.0 y +2.0.</p>
+                    
+                    <p style="margin-bottom: 15px;"><strong>Interpretación de magnitud:</strong></p>
+                    <ul style="margin-left: 25px; margin-bottom: 15px;">
+                        <li><strong>|D| < 0.15:</strong> Sin asociación automática</li>
+                        <li><strong>0.15 ≤ |D| < 0.35:</strong> Asociación leve</li>
+                        <li><strong>0.35 ≤ |D| < 0.65:</strong> Asociación moderada</li>
+                        <li><strong>|D| ≥ 0.65:</strong> Asociación fuerte</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px;"><strong>Nota importante:</strong> El IAT mide asociaciones automáticas a nivel grupal y no es diagnóstico individual. Los resultados reflejan asociaciones que pueden estar influenciadas por la exposición cultural y no necesariamente reflejan creencias conscientes o intenciones personales.</p>
+                    
+                    <p style="margin-top: 20px;">Sus datos han sido registrados y contribuirán a la investigación científica sobre cognición social.</p>
                 </div>
             </div>
             
@@ -379,13 +537,13 @@
         </div>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/gh/minnojs/minno-quest@0.3/dist/pi-minno.js"></script>
-    
     <script>
     // ===== CONFIGURACIÓN =====
     const CONFIG = {
         imageBaseURL: 'https://raw.githubusercontent.com/DatoSocial/iat-genero-politica/main/',
-        googleScriptURL: '', // Configurar después
+        googleScriptURL: '',
+        showCorrectFeedback: true, // Mostrar ✓ verde en respuestas correctas
+        correctFeedbackDuration: 150, // ms
         
         stimuli: {
             hombres: ['hombre1.jpg', 'hombre2.jpg', 'hombre3.jpg', 'hombre4.jpg', 'hombre5.jpg', 'hombre6.jpg', 'hombre7.jpg', 'hombre8.jpg', 'hombre9.jpg'],
@@ -394,6 +552,23 @@
             negativo: ['Corrupción', 'Incompetencia', 'Autoritarismo', 'Ineficiencia', 'Deshonestidad', 'Opacidad']
         }
     };
+    
+    // Precargar imágenes
+    function preloadImages() {
+        const preloadDiv = document.getElementById('preload');
+        const allImages = [...CONFIG.stimuli.hombres, ...CONFIG.stimuli.mujeres];
+        
+        allImages.forEach(img => {
+            const imgEl = document.createElement('img');
+            imgEl.src = CONFIG.imageBaseURL + img;
+            preloadDiv.appendChild(imgEl);
+        });
+        
+        console.log('✅ Precargando', allImages.length, 'imágenes...');
+    }
+    
+    // Precargar al cargar la página
+    window.addEventListener('load', preloadImages);
     
     const participant = {
         id: 'P_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
@@ -449,52 +624,108 @@
         participant.startTime = new Date().toISOString();
         participant.orderCondition = Math.random() < 0.5 ? 'A' : 'B';
         
+        console.log('═══════════════════════════════════════');
         console.log('CONDICIÓN:', participant.orderCondition);
+        console.log(participant.orderCondition === 'A' ? 
+            'Hombres+Positivo primero' : 
+            'Mujeres+Positivo primero');
+        console.log('═══════════════════════════════════════');
         
         updateProgress(50);
+        currentBlock = 0;
+        showBlockBreak();
+    });
+    
+    // ===== PANTALLAS ENTRE BLOQUES =====
+    const blockMessages = {
+        0: {
+            title: 'Bloque 1 de 7',
+            message: 'En este bloque practicará clasificando <strong>rostros</strong> como <strong>Hombres</strong> o <strong>Mujeres</strong>.',
+            emphasis: 'Recuerde: E = Izquierda, I = Derecha'
+        },
+        1: {
+            title: 'Bloque 2 de 7',
+            message: 'Ahora practicará clasificando <strong>palabras</strong> como <strong>Positivo</strong> o <strong>Negativo</strong>.',
+            emphasis: 'Responda lo más rápido posible'
+        },
+        2: {
+            title: 'Bloque 3 de 7',
+            message: 'Ahora combinará ambas tareas. Clasificará tanto <strong>rostros</strong> como <strong>palabras</strong> usando las mismas teclas.',
+            emphasis: 'Preste atención a las categorías en la parte superior'
+        },
+        3: {
+            title: 'Bloque 4 de 7',
+            message: 'Continuará con la misma tarea combinada. Intente ser <strong>rápido y preciso</strong>.',
+            emphasis: ''
+        },
+        4: {
+            title: '¡ATENCIÓN! Bloque 5 de 7',
+            message: '<strong style="color: #e74c3c;">Las categorías han cambiado de lado.</strong> Preste mucha atención a las nuevas posiciones.',
+            emphasis: '¡Las categorías de género están en posiciones opuestas!'
+        },
+        5: {
+            title: 'Bloque 6 de 7',
+            message: 'Ahora combinará de nuevo rostros y palabras con las <strong>nuevas posiciones</strong> de las categorías.',
+            emphasis: 'Recuerde las nuevas posiciones'
+        },
+        6: {
+            title: 'Bloque 7 de 7 - ¡Último bloque!',
+            message: 'Este es el último bloque. Continúe clasificando rostros y palabras con las mismas categorías.',
+            emphasis: '¡Último esfuerzo!'
+        }
+    };
+    
+    function showBlockBreak() {
+        if (currentBlock >= 7) {
+            finishIAT();
+            return;
+        }
+        
+        const msg = blockMessages[currentBlock];
+        document.getElementById('break-title').textContent = msg.title;
+        document.getElementById('break-message').innerHTML = msg.message;
+        document.getElementById('break-emphasis').textContent = msg.emphasis;
+        
+        showSection('block-break-section');
+    }
+    
+    document.getElementById('continue-btn').addEventListener('click', () => {
         showSection('iat-section');
-        setTimeout(startIAT, 500);
+        setTimeout(startBlock, 500);
     });
     
     // ===== ESTRUCTURA IAT =====
     function getBlocks() {
         if (participant.orderCondition === 'A') {
             return [
-                {num:1, name:'Práctica género', trials:18, leftCat:'Hombres', rightCat:'Mujeres', leftStim:CONFIG.stimuli.hombres.slice(0,9), rightStim:CONFIG.stimuli.mujeres.slice(0,9), isImage:true},
-                {num:2, name:'Práctica atributos', trials:12, leftCat:'Positivo', rightCat:'Negativo', leftStim:CONFIG.stimuli.positivo, rightStim:CONFIG.stimuli.negativo, isImage:false},
-                {num:3, name:'Combinada 1 práctica', trials:18, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
-                {num:4, name:'Combinada 1 test', trials:36, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
-                {num:5, name:'Inversión', trials:27, leftCat:'Mujeres', rightCat:'Hombres', leftStim:CONFIG.stimuli.mujeres, rightStim:CONFIG.stimuli.hombres, isImage:true},
-                {num:6, name:'Combinada 2 práctica', trials:18, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
-                {num:7, name:'Combinada 2 test', trials:36, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'}
+                {num:1, trials:18, leftCat:'Hombres', rightCat:'Mujeres', leftStim:CONFIG.stimuli.hombres.slice(0,9), rightStim:CONFIG.stimuli.mujeres.slice(0,9), isImage:true},
+                {num:2, trials:12, leftCat:'Positivo', rightCat:'Negativo', leftStim:CONFIG.stimuli.positivo, rightStim:CONFIG.stimuli.negativo, isImage:false},
+                {num:3, trials:18, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:4, trials:36, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:5, trials:27, leftCat:'Mujeres', rightCat:'Hombres', leftStim:CONFIG.stimuli.mujeres, rightStim:CONFIG.stimuli.hombres, isImage:true},
+                {num:6, trials:18, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:7, trials:36, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'}
             ];
         } else {
             return [
-                {num:1, name:'Práctica género', trials:18, leftCat:'Hombres', rightCat:'Mujeres', leftStim:CONFIG.stimuli.hombres.slice(0,9), rightStim:CONFIG.stimuli.mujeres.slice(0,9), isImage:true},
-                {num:2, name:'Práctica atributos', trials:12, leftCat:'Positivo', rightCat:'Negativo', leftStim:CONFIG.stimuli.positivo, rightStim:CONFIG.stimuli.negativo, isImage:false},
-                {num:3, name:'Combinada 1 práctica', trials:18, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
-                {num:4, name:'Combinada 1 test', trials:36, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
-                {num:5, name:'Inversión', trials:27, leftCat:'Mujeres', rightCat:'Hombres', leftStim:CONFIG.stimuli.mujeres, rightStim:CONFIG.stimuli.hombres, isImage:true},
-                {num:6, name:'Combinada 2 práctica', trials:18, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
-                {num:7, name:'Combinada 2 test', trials:36, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'}
+                {num:1, trials:18, leftCat:'Hombres', rightCat:'Mujeres', leftStim:CONFIG.stimuli.hombres.slice(0,9), rightStim:CONFIG.stimuli.mujeres.slice(0,9), isImage:true},
+                {num:2, trials:12, leftCat:'Positivo', rightCat:'Negativo', leftStim:CONFIG.stimuli.positivo, rightStim:CONFIG.stimuli.negativo, isImage:false},
+                {num:3, trials:18, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:4, trials:36, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:5, trials:27, leftCat:'Mujeres', rightCat:'Hombres', leftStim:CONFIG.stimuli.mujeres, rightStim:CONFIG.stimuli.hombres, isImage:true},
+                {num:6, trials:18, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:7, trials:36, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'}
             ];
         }
     }
     
-    function startIAT() {
-        currentBlock = 0;
-        currentTrial = 0;
-        startBlock();
-    }
-    
     function startBlock() {
         const blocks = getBlocks();
-        if (currentBlock >= blocks.length) { finishIAT(); return; }
-        
         const block = blocks[currentBlock];
-        updateProgress(50 + (currentBlock / blocks.length) * 40);
         
-        document.getElementById('block-instructions').innerHTML = `<strong>Bloque ${block.num} de 7:</strong> ${block.name}`;
+        updateProgress(50 + ((currentBlock + 1) / blocks.length) * 40);
+        
+        document.getElementById('block-instructions').innerHTML = `<strong>Bloque ${block.num} de 7</strong>`;
         document.getElementById('left-label').textContent = block.leftCat;
         document.getElementById('right-label').textContent = block.rightCat;
         
@@ -509,18 +740,21 @@
         blockTrials = shuffle(blockTrials);
         currentTrial = 0;
         
-        setTimeout(showTrial, 1000);
+        setTimeout(showTrial, 250);
     }
     
     function showTrial() {
-        const blocks = getBlocks();
-        if (currentTrial >= blockTrials.length) { currentBlock++; startBlock(); return; }
+        if (currentTrial >= blockTrials.length) { 
+            currentBlock++; 
+            showBlockBreak();
+            return; 
+        }
         
         const trial = blockTrials[currentTrial];
         const stimEl = document.getElementById('stimulus');
         
         if (trial.isImage) {
-            stimEl.innerHTML = `<img src="${CONFIG.imageBaseURL}${trial.stimulus}">`;
+            stimEl.innerHTML = `<img src="${CONFIG.imageBaseURL}${trial.stimulus}" alt="Estímulo">`;
         } else {
             stimEl.innerHTML = `<div class="word">${trial.stimulus}</div>`;
         }
@@ -554,8 +788,17 @@
         });
         
         if (correct) {
-            currentTrial++;
-            setTimeout(showTrial, 250);
+            if (CONFIG.showCorrectFeedback) {
+                document.getElementById('correct-check').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('correct-check').style.display = 'none';
+                    currentTrial++;
+                    setTimeout(showTrial, 100);
+                }, CONFIG.correctFeedbackDuration);
+            } else {
+                currentTrial++;
+                setTimeout(showTrial, 250);
+            }
         } else {
             document.getElementById('error-x').style.display = 'block';
             setTimeout(() => {
@@ -570,11 +813,24 @@
         participant.completionTime = new Date().toISOString();
         updateProgress(95);
         
-        const dScore = calculateDScore(participant.trials);
-        participant.dScore = dScore.d_score;
-        participant.dScoreData = dScore;
+        const dScoreResult = calculateDScore(participant.trials);
+        participant.dScore = dScoreResult.d_score;
+        participant.dScoreData = dScoreResult;
         
-        console.log('D-score:', dScore.d_score);
+        console.log('═══════════════════════════════════════');
+        console.log('IAT COMPLETADO');
+        console.log('D-score:', dScoreResult.d_score);
+        console.log('Interpretación:', dScoreResult.interpretation);
+        console.log('═══════════════════════════════════════');
+        
+        // Mostrar resultado
+        if (dScoreResult.valid) {
+            document.getElementById('final-dscore').textContent = dScoreResult.d_score.toFixed(3);
+            document.getElementById('final-interpretation').textContent = getInterpretationText(dScoreResult.d_score);
+        } else {
+            document.getElementById('final-dscore').textContent = 'N/A';
+            document.getElementById('final-interpretation').textContent = 'Datos no válidos para análisis';
+        }
         
         if (CONFIG.googleScriptURL) {
             fetch(CONFIG.googleScriptURL, {
@@ -584,11 +840,36 @@
                 body: JSON.stringify(participant)
             }).catch(err => console.error(err));
         } else {
-            console.log('Datos:', participant);
+            console.log('Datos completos:', participant);
         }
         
         updateProgress(100);
         showSection('results-section');
+    }
+    
+    function getInterpretationText(d) {
+        const abs = Math.abs(d);
+        let magnitude, direction;
+        
+        if (abs < 0.15) {
+            magnitude = 'Sin asociación automática significativa';
+        } else if (abs < 0.35) {
+            magnitude = 'Asociación automática LEVE';
+        } else if (abs < 0.65) {
+            magnitude = 'Asociación automática MODERADA';
+        } else {
+            magnitude = 'Asociación automática FUERTE';
+        }
+        
+        if (abs < 0.15) {
+            direction = '';
+        } else if (d > 0) {
+            direction = ': Mujeres + Atributos positivos';
+        } else {
+            direction = ': Hombres + Atributos positivos';
+        }
+        
+        return magnitude + direction;
     }
     
     function calculateDScore(allTrials) {
@@ -596,7 +877,7 @@
         let filtered = trials.filter(t => t.rt <= 10000);
         
         const fastRate = trials.filter(t => t.rt < 300).length / trials.length;
-        if (fastRate > 0.10) return {valid: false, error: 'Excluido', d_score: null};
+        if (fastRate > 0.10) return {valid: false, error: 'Excluido: >10% respuestas <300ms', d_score: null, interpretation: null};
         
         const b3 = filtered.filter(t => t.block === 3);
         const b4 = filtered.filter(t => t.block === 4);
@@ -628,7 +909,13 @@
         const dt = (m7 - m4) / sdt;
         const d = (dp + dt) / 2;
         
-        return {valid: true, d_score: parseFloat(d.toFixed(3)), d_practice: parseFloat(dp.toFixed(3)), d_test: parseFloat(dt.toFixed(3))};
+        return {
+            valid: true, 
+            d_score: parseFloat(d.toFixed(3)), 
+            d_practice: parseFloat(dp.toFixed(3)), 
+            d_test: parseFloat(dt.toFixed(3)),
+            interpretation: getInterpretationText(d)
+        };
     }
     </script>
 </body>
