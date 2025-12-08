@@ -4,233 +4,291 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IAT - Género y Liderazgo Político</title>
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
         }
         
         .container {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 50px;
+            max-width: 900px;
             width: 100%;
+            animation: fadeIn 0.5s ease;
         }
         
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .section {
-            display: none;
+        h1 { color: #667eea; margin-bottom: 30px; text-align: center; font-size: 2em; }
+        
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
         }
         
-        .section.active {
-            display: block;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
         }
         
-        .consent-text {
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 20px;
-            text-align: justify;
+        .consent-text { line-height: 1.8; color: #555; margin-bottom: 25px; }
+        .consent-text h3 { color: #667eea; margin-top: 25px; margin-bottom: 10px; }
+        
+        .checkbox-group {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
         
-        .form-group {
-            margin-bottom: 20px;
+        .checkbox-group label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
         }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 15px;
+            margin-top: 3px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+        
+        .form-group { margin-bottom: 25px; }
         
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #333;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        input[type="number"],
-        select {
+        input[type="number"], select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
         }
         
         button {
-            background-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        button:hover {
-            background-color: #5568d3;
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
         
         button:disabled {
-            background-color: #ccc;
+            background: #ccc;
             cursor: not-allowed;
+            transform: none;
         }
         
-        .btn-container {
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        #iat-container {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: white;
-        }
+        .btn-container { text-align: center; margin-top: 40px; }
         
         .instructions {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.8;
         }
         
         .instructions h3 {
             color: #667eea;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .instructions ul {
-            margin-left: 20px;
-            margin-top: 10px;
+            margin-left: 25px;
+            margin-top: 15px;
         }
         
-        .instructions li {
-            margin-bottom: 8px;
+        .instructions li { margin-bottom: 12px; }
+        
+        #iat-display {
+            width: 100%;
+            height: 600px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
         
-        .loading {
+        .iat-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 50px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .iat-category {
+            font-size: 20px;
+            font-weight: bold;
             text-align: center;
+        }
+        
+        .iat-category.left { color: #667eea; }
+        .iat-category.right { color: #764ba2; }
+        
+        .iat-stimulus-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 40px;
-            color: #667eea;
-            font-size: 18px;
+        }
+        
+        .iat-stimulus img {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .iat-stimulus .word {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .iat-error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .iat-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+        
+        .iat-instructions {
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            border-radius: 10px;
         }
         
         .result-box {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
             text-align: center;
         }
         
         .result-box h2 {
             color: #667eea;
-            margin-bottom: 20px;
-        }
-        
-        .result-box .score {
-            font-size: 48px;
-            font-weight: bold;
-            color: #333;
-            margin: 20px 0;
-        }
-        
-        .result-box .interpretation {
-            font-size: 18px;
-            color: #555;
-            line-height: 1.6;
-            margin-top: 20px;
-        }
-        
-        .checkbox-group {
-            margin: 20px 0;
-        }
-        
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .checkbox-group input[type="checkbox"] {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+            margin-bottom: 25px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- SECCIÓN 1: CONSENTIMIENTO INFORMADO -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        
+        <!-- SECCIÓN 1: CONSENTIMIENTO -->
         <div id="consent-section" class="section active">
-            <h1>Consentimiento Informado</h1>
+            <h1>📋 Consentimiento Informado</h1>
             
             <div class="consent-text">
                 <h3>Estudio sobre Asociaciones Implícitas</h3>
-                
-                <p><strong>Investigador Principal:</strong> [Tu nombre]</p>
+                <p><strong>Investigador:</strong> [Tu nombre]</p>
                 <p><strong>Institución:</strong> [Tu institución]</p>
                 
-                <h3 style="margin-top: 20px;">Propósito del Estudio</h3>
-                <p>Este estudio investiga las asociaciones automáticas entre conceptos sociales. Su participación contribuirá a la comprensión científica de la cognición social.</p>
+                <h3>Propósito</h3>
+                <p>Investigar asociaciones automáticas entre conceptos de género y liderazgo político mediante el Test de Asociación Implícita (IAT).</p>
                 
-                <h3 style="margin-top: 20px;">Procedimiento</h3>
-                <p>Se le pedirá completar una tarea de clasificación en computadora que toma aproximadamente 12-15 minutos. Verá imágenes y palabras que deberá clasificar presionando teclas específicas.</p>
+                <h3>Procedimiento</h3>
+                <p>Completará una tarea de clasificación que toma <strong>12-15 minutos</strong>. Verá imágenes y palabras que clasificará usando teclas específicas.</p>
                 
-                <h3 style="margin-top: 20px;">Confidencialidad</h3>
-                <p>Sus respuestas son completamente anónimas. Los datos se almacenarán de forma segura y solo serán accesibles para el equipo de investigación.</p>
+                <h3>Confidencialidad</h3>
+                <p>Sus respuestas son <strong>completamente anónimas</strong>. No se recopila información identificatoria.</p>
                 
-                <h3 style="margin-top: 20px;">Participación Voluntaria</h3>
-                <p>Su participación es completamente voluntaria. Puede retirarse en cualquier momento sin consecuencias.</p>
-                
-                <h3 style="margin-top: 20px;">Contacto</h3>
-                <p>Para preguntas sobre este estudio, contacte: [tu email]</p>
+                <h3>Participación</h3>
+                <p>Su participación es <strong>voluntaria</strong>. Puede retirarse en cualquier momento.</p>
             </div>
             
             <div class="checkbox-group">
                 <label>
-                    <input type="checkbox" id="consent-checkbox">
-                    <span>He leído y entiendo la información anterior. Acepto participar voluntariamente en este estudio.</span>
+                    <input type="checkbox" id="consent-check">
+                    <span>He leído y comprendo la información. <strong>Acepto participar voluntariamente</strong> y tengo al menos 18 años.</span>
                 </label>
             </div>
             
             <div class="btn-container">
-                <button id="consent-btn" disabled>Continuar</button>
+                <button id="consent-btn" disabled>Continuar →</button>
             </div>
         </div>
         
-        <!-- SECCIÓN 2: DATOS DEMOGRÁFICOS -->
+        <!-- SECCIÓN 2: DEMOGRAFÍA -->
         <div id="demographics-section" class="section">
-            <h1>Información Demográfica</h1>
+            <h1>👤 Información Demográfica</h1>
+            
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                Esta información es opcional pero valiosa para el análisis.
+            </p>
             
             <div class="form-group">
                 <label for="age">Edad:</label>
-                <input type="number" id="age" min="18" max="99" placeholder="Ingrese su edad" required>
+                <input type="number" id="age" min="18" max="99" placeholder="18-99">
             </div>
             
             <div class="form-group">
                 <label for="sex">Sexo:</label>
-                <select id="sex" required>
+                <select id="sex">
                     <option value="">Seleccione...</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
@@ -240,588 +298,337 @@
             </div>
             
             <div class="btn-container">
-                <button id="demographics-btn">Continuar</button>
+                <button id="demo-btn">Continuar →</button>
             </div>
         </div>
         
         <!-- SECCIÓN 3: INSTRUCCIONES -->
         <div id="instructions-section" class="section">
-            <h1>Instrucciones del Test</h1>
+            <h1>📖 Instrucciones</h1>
             
             <div class="instructions">
-                <h3>¿Qué es el Test de Asociación Implícita (IAT)?</h3>
-                <p>El IAT mide la fuerza de asociaciones automáticas entre conceptos. En esta versión, mediremos asociaciones relacionadas con género y atributos políticos.</p>
+                <h3>¿Qué es el IAT?</h3>
+                <p>El IAT mide asociaciones automáticas entre conceptos. Mediremos asociaciones entre <strong>género</strong> y <strong>atributos políticos</strong>.</p>
                 
-                <h3 style="margin-top: 20px;">Cómo funciona:</h3>
+                <h3>Qué verá:</h3>
                 <ul>
-                    <li>Verá <strong>imágenes de rostros</strong> (hombres y mujeres)</li>
-                    <li>Verá <strong>palabras</strong> relacionadas con atributos positivos y negativos del liderazgo político</li>
-                    <li>Deberá clasificarlos lo más <strong>rápido posible</strong> usando dos teclas</li>
+                    <li>Imágenes de rostros (hombres y mujeres)</li>
+                    <li>Palabras (atributos positivos y negativos del liderazgo)</li>
                 </ul>
                 
-                <h3 style="margin-top: 20px;">Teclas a usar:</h3>
+                <h3>Cómo responder:</h3>
                 <ul>
-                    <li><strong>Tecla E</strong> → Categorías del lado IZQUIERDO</li>
-                    <li><strong>Tecla I</strong> → Categorías del lado DERECHO</li>
+                    <li>Tecla <strong>E</strong> = Categoría IZQUIERDA</li>
+                    <li>Tecla <strong>I</strong> = Categoría DERECHA</li>
                 </ul>
                 
-                <h3 style="margin-top: 20px;">Importante:</h3>
+                <h3>Importante:</h3>
                 <ul>
                     <li>✅ Responda lo más <strong>rápido posible</strong></li>
-                    <li>✅ Minimice los errores</li>
-                    <li>✅ Si comete un error, verá una "X" roja - simplemente presione la tecla correcta</li>
-                    <li>✅ El test dura aproximadamente <strong>12-15 minutos</strong></li>
+                    <li>✅ Minimice errores</li>
+                    <li>✅ Si se equivoca, verá una "X" roja - presione la tecla correcta</li>
+                    <li>✅ Las categorías cambiarán - preste atención</li>
+                    <li>✅ Duración: <strong>12-15 minutos</strong></li>
                 </ul>
             </div>
             
             <div class="btn-container">
-                <button id="instructions-btn">Comenzar el Test</button>
+                <button id="instructions-btn">🚀 Comenzar</button>
             </div>
         </div>
         
         <!-- SECCIÓN 4: IAT -->
         <div id="iat-section" class="section">
-            <div class="loading">
-                Cargando test... Por favor espere.
+            <div class="iat-instructions" id="block-instructions"></div>
+            
+            <div id="iat-display">
+                <div class="iat-header">
+                    <div class="iat-category left" id="left-label"></div>
+                    <div class="iat-category right" id="right-label"></div>
+                </div>
+                
+                <div class="iat-stimulus-area">
+                    <div class="iat-stimulus" id="stimulus"></div>
+                </div>
+                
+                <div class="iat-error" id="error-x">✗</div>
+                
+                <div class="iat-footer">
+                    Presione <strong>E</strong> para IZQUIERDA o <strong>I</strong> para DERECHA
+                </div>
             </div>
-            <div id="iat-container" style="display: none;"></div>
         </div>
         
         <!-- SECCIÓN 5: RESULTADOS -->
         <div id="results-section" class="section">
-            <h1>¡Test Completado!</h1>
+            <h1>✅ ¡Completado!</h1>
             
             <div class="result-box">
-                <h2>Gracias por su participación</h2>
-                <p>Sus datos han sido guardados exitosamente.</p>
+                <h2>🎉 Gracias por su participación</h2>
+                <p style="font-size: 1.2em; margin-top: 20px;">Sus datos han sido registrados exitosamente.</p>
                 
-                <div class="interpretation">
-                    <p>Los resultados de este estudio contribuirán a la investigación científica sobre cognición social y asociaciones implícitas.</p>
-                    <p style="margin-top: 15px;">Si tiene preguntas sobre el estudio o desea conocer más sobre los resultados generales, puede contactar al investigador principal.</p>
+                <div style="margin-top: 30px; line-height: 1.8; color: #555;">
+                    <p>Sus respuestas contribuirán a la investigación científica sobre cognición social y asociaciones implícitas.</p>
+                    <p style="margin-top: 20px;"><strong>Nota:</strong> El IAT mide tendencias grupales y no es diagnóstico individual.</p>
                 </div>
             </div>
             
-            <div class="btn-container" style="margin-top: 30px;">
+            <div class="btn-container" style="margin-top: 40px;">
                 <button onclick="window.close()">Cerrar</button>
             </div>
         </div>
     </div>
     
-    <!-- MINNO JS -->
     <script src="https://cdn.jsdelivr.net/gh/minnojs/minno-quest@0.3/dist/pi-minno.js"></script>
     
-    <!-- D-SCORE CALCULATOR -->
     <script>
-    // ========================================
-    // CALCULADOR D-SCORE (Greenwald et al., 2003)
-    // ========================================
+    // ===== CONFIGURACIÓN =====
+    const CONFIG = {
+        imageBaseURL: 'https://raw.githubusercontent.com/DatoSocial/iat-genero-politica/main/',
+        googleScriptURL: '', // Configurar después
+        
+        stimuli: {
+            hombres: ['hombre1.jpg', 'hombre2.jpg', 'hombre3.jpg', 'hombre4.jpg', 'hombre5.jpg', 'hombre6.jpg', 'hombre7.jpg', 'hombre8.jpg', 'hombre9.jpg'],
+            mujeres: ['mujer1.jpg', 'mujer2.jpg', 'mujer3.jpg', 'mujer4.jpg', 'mujer5.jpg', 'mujer6.jpg', 'mujer7.jpg', 'mujer8.jpg', 'mujer9.jpg'],
+            positivo: ['Honestidad', 'Competencia', 'Liderazgo', 'Eficiencia', 'Integridad', 'Transparencia'],
+            negativo: ['Corrupción', 'Incompetencia', 'Autoritarismo', 'Ineficiencia', 'Deshonestidad', 'Opacidad']
+        }
+    };
     
-    class IATDScoreCalculator {
-        calculateDScore(trials) {
-            // Validar y filtrar datos
-            const validation = this.validateAndFilterData(trials);
-            
-            if (!validation.valid) {
-                return {
-                    valid: false,
-                    error: validation.error,
-                    d_score: null
-                };
-            }
-            
-            const filteredTrials = validation.trials;
-            
-            // Separar por bloques
-            const block3 = filteredTrials.filter(t => t.block === 3);
-            const block4 = filteredTrials.filter(t => t.block === 4);
-            const block6 = filteredTrials.filter(t => t.block === 6);
-            const block7 = filteredTrials.filter(t => t.block === 7);
-            
-            // Aplicar error penalty
-            const block3_adjusted = this.applyErrorPenalty(block3);
-            const block4_adjusted = this.applyErrorPenalty(block4);
-            const block6_adjusted = this.applyErrorPenalty(block6);
-            const block7_adjusted = this.applyErrorPenalty(block7);
-            
-            // Calcular medias
-            const mean_b3 = this.calculateMean(block3_adjusted);
-            const mean_b4 = this.calculateMean(block4_adjusted);
-            const mean_b6 = this.calculateMean(block6_adjusted);
-            const mean_b7 = this.calculateMean(block7_adjusted);
-            
-            // Calcular SD pooled
-            const sd_practice = this.calculatePooledSD([...block3_adjusted, ...block6_adjusted]);
-            const sd_test = this.calculatePooledSD([...block4_adjusted, ...block7_adjusted]);
-            
-            // Calcular D-scores
-            const d_practice = (mean_b6 - mean_b3) / sd_practice;
-            const d_test = (mean_b7 - mean_b4) / sd_test;
-            const d_score = (d_practice + d_test) / 2;
-            
-            // Calcular estadísticas diagnósticas
-            const diagnostics = this.calculateDiagnostics(trials);
-            
-            return {
-                valid: true,
-                d_score: d_score,
-                d_practice: d_practice,
-                d_test: d_test,
-                interpretation: this.interpretDScore(d_score),
-                stats: {
-                    mean_compatible: (mean_b3 + mean_b4) / 2,
-                    mean_incompatible: (mean_b6 + mean_b7) / 2,
-                    sd_practice: sd_practice,
-                    sd_test: sd_test,
-                    total_errors: diagnostics.total_errors,
-                    error_rate: diagnostics.error_rate,
-                    trials_used: filteredTrials.length,
-                    trials_deleted: trials.length - filteredTrials.length
-                },
-                diagnostics: diagnostics
-            };
-        }
-        
-        validateAndFilterData(trials) {
-            // Eliminar trials > 10,000ms
-            let filtered = trials.filter(t => t.rt <= 10000);
-            
-            // Contar trials < 300ms
-            const fastTrials = trials.filter(t => t.rt < 300).length;
-            const fastRate = fastTrials / trials.length;
-            
-            // Excluir si >10% son <300ms
-            if (fastRate > 0.10) {
-                return {
-                    valid: false,
-                    error: 'Participante excluido: >10% respuestas muy rápidas (<300ms)',
-                    trials: []
-                };
-            }
-            
-            return {
-                valid: true,
-                trials: filtered
-            };
-        }
-        
-        applyErrorPenalty(blockTrials) {
-            const correctTrials = blockTrials.filter(t => t.correct);
-            const meanCorrect = this.calculateMean(correctTrials);
-            
-            return blockTrials.map(trial => {
-                if (!trial.correct) {
-                    return {...trial, rt_adjusted: meanCorrect + 600};
-                }
-                return {...trial, rt_adjusted: trial.rt};
-            });
-        }
-        
-        calculateMean(trials) {
-            const sum = trials.reduce((acc, t) => acc + (t.rt_adjusted || t.rt), 0);
-            return sum / trials.length;
-        }
-        
-        calculatePooledSD(trials) {
-            const mean = this.calculateMean(trials);
-            const squaredDiffs = trials.map(t => {
-                const value = t.rt_adjusted || t.rt;
-                return Math.pow(value - mean, 2);
-            });
-            const variance = squaredDiffs.reduce((a, b) => a + b, 0) / (trials.length - 1);
-            return Math.sqrt(variance);
-        }
-        
-        calculateDiagnostics(trials) {
-            const errors = trials.filter(t => !t.correct).length;
-            const errorRate = (errors / trials.length) * 100;
-            
-            const errorsByBlock = {};
-            const meansByBlock = {};
-            
-            [3, 4, 6, 7].forEach(blockNum => {
-                const blockTrials = trials.filter(t => t.block === blockNum);
-                errorsByBlock[`block${blockNum}`] = blockTrials.filter(t => !t.correct).length;
-                meansByBlock[`block${blockNum}`] = Math.round(this.calculateMean(blockTrials));
-            });
-            
-            return {
-                total_errors: errors,
-                error_rate: errorRate.toFixed(2),
-                errors_by_block: errorsByBlock,
-                means_by_block: meansByBlock
-            };
-        }
-        
-        interpretDScore(d) {
-            const abs_d = Math.abs(d);
-            let strength, direction, label_es;
-            
-            if (abs_d < 0.15) {
-                strength = 'none';
-                direction = 'neutral';
-                label_es = 'Sin asociación automática significativa';
-            } else if (abs_d < 0.35) {
-                strength = 'slight';
-                direction = d > 0 ? 'concept2_positive' : 'concept1_positive';
-                label_es = d > 0 ? 
-                    'Asociación automática leve: Mujeres con atributos positivos' :
-                    'Asociación automática leve: Hombres con atributos positivos';
-            } else if (abs_d < 0.65) {
-                strength = 'moderate';
-                direction = d > 0 ? 'concept2_positive' : 'concept1_positive';
-                label_es = d > 0 ?
-                    'Asociación automática moderada: Mujeres con atributos positivos' :
-                    'Asociación automática moderada: Hombres con atributos positivos';
-            } else {
-                strength = 'strong';
-                direction = d > 0 ? 'concept2_positive' : 'concept1_positive';
-                label_es = d > 0 ?
-                    'Asociación automática fuerte: Mujeres con atributos positivos' :
-                    'Asociación automática fuerte: Hombres con atributos positivos';
-            }
-            
-            return {strength, direction, label_es};
-        }
-    }
-    
-    // Función global de conveniencia
-    function calculateIATScore(trials) {
-        const calculator = new IATDScoreCalculator();
-        return calculator.calculateDScore(trials);
-    }
-    </script>
-    
-    <!-- MAIN APP LOGIC -->
-    <script>
-    // ========================================
-    // VARIABLES GLOBALES
-    // ========================================
-    
-    let participantData = {
-        id: generateID(),
+    const participant = {
+        id: 'P_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
         age: null,
         sex: null,
         orderCondition: null,
         startTime: null,
-        iatData: []
+        completionTime: null,
+        trials: []
     };
     
-    // ========================================
-    // GENERAR ID ÚNICO
-    // ========================================
+    let currentBlock = 0, currentTrial = 0, blockTrials = [], trialStartTime = 0;
     
-    function generateID() {
-        return 'P_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    function updateProgress(p) { document.getElementById('progress').style.width = p + '%'; }
+    function showSection(id) { 
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+    function shuffle(arr) { 
+        const a = [...arr]; 
+        for (let i = a.length - 1; i > 0; i--) { 
+            const j = Math.floor(Math.random() * (i + 1)); 
+            [a[i], a[j]] = [a[j], a[i]]; 
+        } 
+        return a; 
     }
     
-    // ========================================
-    // NAVEGACIÓN ENTRE SECCIONES
-    // ========================================
-    
-    function showSection(sectionId) {
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
-    }
-    
-    // ========================================
-    // SECCIÓN 1: CONSENTIMIENTO
-    // ========================================
-    
-    document.getElementById('consent-checkbox').addEventListener('change', function(e) {
+    // ===== NAVEGACIÓN =====
+    document.getElementById('consent-check').addEventListener('change', e => {
         document.getElementById('consent-btn').disabled = !e.target.checked;
     });
     
-    document.getElementById('consent-btn').addEventListener('click', function() {
+    document.getElementById('consent-btn').addEventListener('click', () => {
+        updateProgress(20);
         showSection('demographics-section');
     });
     
-    // ========================================
-    // SECCIÓN 2: DEMOGRAFÍA
-    // ========================================
-    
-    document.getElementById('demographics-btn').addEventListener('click', function() {
-        const age = document.getElementById('age').value;
+    document.getElementById('demo-btn').addEventListener('click', () => {
+        const age = parseInt(document.getElementById('age').value);
         const sex = document.getElementById('sex').value;
         
-        if (!age || age < 18 || age > 99) {
-            alert('Por favor ingrese una edad válida (18-99)');
-            return;
-        }
+        if (!age || age < 18 || age > 99) { alert('Edad válida 18-99'); return; }
+        if (!sex) { alert('Seleccione sexo'); return; }
         
-        if (!sex) {
-            alert('Por favor seleccione su sexo');
-            return;
-        }
-        
-        participantData.age = age;
-        participantData.sex = sex;
-        
+        participant.age = age;
+        participant.sex = sex;
+        updateProgress(40);
         showSection('instructions-section');
     });
     
-    // ========================================
-    // SECCIÓN 3: INSTRUCCIONES
-    // ========================================
-    
-    document.getElementById('instructions-btn').addEventListener('click', function() {
-        participantData.startTime = new Date().toISOString();
+    document.getElementById('instructions-btn').addEventListener('click', () => {
+        participant.startTime = new Date().toISOString();
+        participant.orderCondition = Math.random() < 0.5 ? 'A' : 'B';
+        
+        console.log('CONDICIÓN:', participant.orderCondition);
+        
+        updateProgress(50);
         showSection('iat-section');
-        loadIAT();
+        setTimeout(startIAT, 500);
     });
     
-    // ========================================
-    // SECCIÓN 4: CARGAR IAT
-    // ========================================
-    
-    function loadIAT() {
-        // Asignación aleatoria de condición de orden
-        const orderCondition = Math.random() < 0.5 ? 'A' : 'B';
-        participantData.orderCondition = orderCondition;
-        
-        console.log('='.repeat(60));
-        console.log('CONDICIÓN ASIGNADA:', orderCondition);
-        console.log(orderCondition === 'A' ? 
-            'Bloques 3-4: Hombres + Positivo primero' : 
-            'Bloques 3-4: Mujeres + Positivo primero');
-        console.log('='.repeat(60));
-        
-        // Configuración del IAT con Minno.js
-        const iatScript = createIATScript(orderCondition);
-        
-        // Ocultar mensaje de carga, mostrar contenedor IAT
-        document.querySelector('.loading').style.display = 'none';
-        document.getElementById('iat-container').style.display = 'block';
-        
-        // Inicializar Minno
-        minnoJS(document.getElementById('iat-container'), iatScript);
+    // ===== ESTRUCTURA IAT =====
+    function getBlocks() {
+        if (participant.orderCondition === 'A') {
+            return [
+                {num:1, name:'Práctica género', trials:18, leftCat:'Hombres', rightCat:'Mujeres', leftStim:CONFIG.stimuli.hombres.slice(0,9), rightStim:CONFIG.stimuli.mujeres.slice(0,9), isImage:true},
+                {num:2, name:'Práctica atributos', trials:12, leftCat:'Positivo', rightCat:'Negativo', leftStim:CONFIG.stimuli.positivo, rightStim:CONFIG.stimuli.negativo, isImage:false},
+                {num:3, name:'Combinada 1 práctica', trials:18, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:4, name:'Combinada 1 test', trials:36, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:5, name:'Inversión', trials:27, leftCat:'Mujeres', rightCat:'Hombres', leftStim:CONFIG.stimuli.mujeres, rightStim:CONFIG.stimuli.hombres, isImage:true},
+                {num:6, name:'Combinada 2 práctica', trials:18, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:7, name:'Combinada 2 test', trials:36, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'}
+            ];
+        } else {
+            return [
+                {num:1, name:'Práctica género', trials:18, leftCat:'Hombres', rightCat:'Mujeres', leftStim:CONFIG.stimuli.hombres.slice(0,9), rightStim:CONFIG.stimuli.mujeres.slice(0,9), isImage:true},
+                {num:2, name:'Práctica atributos', trials:12, leftCat:'Positivo', rightCat:'Negativo', leftStim:CONFIG.stimuli.positivo, rightStim:CONFIG.stimuli.negativo, isImage:false},
+                {num:3, name:'Combinada 1 práctica', trials:18, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:4, name:'Combinada 1 test', trials:36, leftCat:'Mujeres o Positivo', rightCat:'Hombres o Negativo', leftStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:5, name:'Inversión', trials:27, leftCat:'Mujeres', rightCat:'Hombres', leftStim:CONFIG.stimuli.mujeres, rightStim:CONFIG.stimuli.hombres, isImage:true},
+                {num:6, name:'Combinada 2 práctica', trials:18, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'},
+                {num:7, name:'Combinada 2 test', trials:36, leftCat:'Hombres o Positivo', rightCat:'Mujeres o Negativo', leftStim:[...CONFIG.stimuli.hombres,...CONFIG.stimuli.positivo], rightStim:[...CONFIG.stimuli.mujeres,...CONFIG.stimuli.negativo], isImage:'mixed'}
+            ];
+        }
     }
     
-    // ========================================
-    // CREAR SCRIPT DEL IAT
-    // ========================================
+    function startIAT() {
+        currentBlock = 0;
+        currentTrial = 0;
+        startBlock();
+    }
     
-    function createIATScript(orderCondition) {
-        // URL base de las imágenes en GitHub
-        const baseURL = 'https://raw.githubusercontent.com/DatoSocial/iat-genero-politica/main/';
+    function startBlock() {
+        const blocks = getBlocks();
+        if (currentBlock >= blocks.length) { finishIAT(); return; }
         
-        return {
-            APIVersion: 3,
-            
-            // Definir estímulos
-            sets: {
-                hombres: [
-                    {media: {image: baseURL + 'hombre1.jpg'}},
-                    {media: {image: baseURL + 'hombre2.jpg'}},
-                    {media: {image: baseURL + 'hombre3.jpg'}},
-                    {media: {image: baseURL + 'hombre4.jpg'}},
-                    {media: {image: baseURL + 'hombre5.jpg'}},
-                    {media: {image: baseURL + 'hombre6.jpg'}},
-                    {media: {image: baseURL + 'hombre7.jpg'}},
-                    {media: {image: baseURL + 'hombre8.jpg'}},
-                    {media: {image: baseURL + 'hombre9.jpg'}}
-                ],
-                mujeres: [
-                    {media: {image: baseURL + 'mujer1.jpg'}},
-                    {media: {image: baseURL + 'mujer2.jpg'}},
-                    {media: {image: baseURL + 'mujer3.jpg'}},
-                    {media: {image: baseURL + 'mujer4.jpg'}},
-                    {media: {image: baseURL + 'mujer5.jpg'}},
-                    {media: {image: baseURL + 'mujer6.jpg'}},
-                    {media: {image: baseURL + 'mujer7.jpg'}},
-                    {media: {image: baseURL + 'mujer8.jpg'}},
-                    {media: {image: baseURL + 'mujer9.jpg'}}
-                ],
-                positivo: [
-                    {media: {word: 'Honestidad'}},
-                    {media: {word: 'Competencia'}},
-                    {media: {word: 'Liderazgo'}},
-                    {media: {word: 'Eficiencia'}},
-                    {media: {word: 'Integridad'}},
-                    {media: {word: 'Transparencia'}}
-                ],
-                negativo: [
-                    {media: {word: 'Corrupción'}},
-                    {media: {word: 'Incompetencia'}},
-                    {media: {word: 'Autoritarismo'}},
-                    {media: {word: 'Ineficiencia'}},
-                    {media: {word: 'Deshonestidad'}},
-                    {media: {word: 'Opacidad'}}
-                ]
-            },
-            
-            // Secuencia del IAT
-            sequence: [
-                // Bloque 1: Práctica targets (18 trials)
-                {
-                    mixer: 'repeat',
-                    times: 9,
-                    data: [
-                        {inherit: {set: 'hombres'}, data: {block: 1, category: 'hombres', side: 'left'}},
-                        {inherit: {set: 'mujeres'}, data: {block: 1, category: 'mujeres', side: 'right'}}
-                    ]
-                },
-                
-                // Bloque 2: Práctica atributos (12 trials)
-                {
-                    mixer: 'repeat',
-                    times: 6,
-                    data: [
-                        {inherit: {set: 'positivo'}, data: {block: 2, category: 'positivo', side: 'left'}},
-                        {inherit: {set: 'negativo'}, data: {block: 2, category: 'negativo', side: 'right'}}
-                    ]
-                },
-                
-                // Bloques 3-4 y 6-7: Depende de la condición
-                ...(orderCondition === 'A' ? 
-                    getConditionABlocks() : 
-                    getConditionBBlocks()
-                ),
-                
-                // Al finalizar, guardar datos
-                {
-                    type: 'custom',
-                    fn: function() {
-                        finishIAT();
-                    }
-                }
-            ],
-            
-            // Configuración de trials
-            trialSets: {
-                default: {
-                    input: [
-                        {handle: 'left', on: 'keypressed', key: 'e'},
-                        {handle: 'right', on: 'keypressed', key: 'i'}
-                    ],
-                    interactions: [
-                        {
-                            conditions: [{type: 'begin'}],
-                            actions: [
-                                {type: 'showStim', handle: 'target'},
-                                {type: 'setInput', input: {handle: 'left', on: 'keypressed', key: 'e'}},
-                                {type: 'setInput', input: {handle: 'right', on: 'keypressed', key: 'i'}}
-                            ]
-                        },
-                        {
-                            conditions: [
-                                {type: 'inputEquals', value: 'left'},
-                                {type: 'trialEquals', property: 'side', value: 'left'}
-                            ],
-                            actions: [
-                                {type: 'removeStim', handle: 'target'},
-                                {type: 'setTrialAttr', setter: {correct: true, latency: 'latency'}},
-                                {type: 'trigger', handle: 'end'}
-                            ]
-                        },
-                        {
-                            conditions: [
-                                {type: 'inputEquals', value: 'right'},
-                                {type: 'trialEquals', property: 'side', value: 'right'}
-                            ],
-                            actions: [
-                                {type: 'removeStim', handle: 'target'},
-                                {type: 'setTrialAttr', setter: {correct: true, latency: 'latency'}},
-                                {type: 'trigger', handle: 'end'}
-                            ]
-                        },
-                        {
-                            conditions: [
-                                {type: 'inputEquals', value: 'left'},
-                                {type: 'trialEquals', property: 'side', value: 'right'}
-                            ],
-                            actions: [
-                                {type: 'showStim', handle: 'error'},
-                                {type: 'setTrialAttr', setter: {correct: false}}
-                            ]
-                        },
-                        {
-                            conditions: [
-                                {type: 'inputEquals', value: 'right'},
-                                {type: 'trialEquals', property: 'side', value: 'left'}
-                            ],
-                            actions: [
-                                {type: 'showStim', handle: 'error'},
-                                {type: 'setTrialAttr', setter: {correct: false}}
-                            ]
-                        }
-                    ],
-                    stimuli: [
-                        {handle: 'error', location: {top: 70}, css: {color: 'red', 'font-size': '2em'}, 
-                         media: {word: 'X'}}
-                    ]
-                }
-            }
-        };
+        const block = blocks[currentBlock];
+        updateProgress(50 + (currentBlock / blocks.length) * 40);
+        
+        document.getElementById('block-instructions').innerHTML = `<strong>Bloque ${block.num} de 7:</strong> ${block.name}`;
+        document.getElementById('left-label').textContent = block.leftCat;
+        document.getElementById('right-label').textContent = block.rightCat;
+        
+        blockTrials = [];
+        for (let i = 0; i < block.trials; i++) {
+            const side = i % 2 === 0 ? 'left' : 'right';
+            const stim = side === 'left' ? block.leftStim : block.rightStim;
+            const stimulus = stim[Math.floor(Math.random() * stim.length)];
+            const isImg = block.isImage === 'mixed' ? stimulus.endsWith('.jpg') : block.isImage;
+            blockTrials.push({block: block.num, stimulus, correctSide: side, isImage: isImg});
+        }
+        blockTrials = shuffle(blockTrials);
+        currentTrial = 0;
+        
+        setTimeout(showTrial, 1000);
     }
     
-    // ========================================
-    // BLOQUES SEGÚN CONDICIÓN
-    // ========================================
-    
-    function getConditionABlocks() {
-        // Condición A: Hombres+Positivo primero
-        return [
-            // Bloque 3: Primera combinada práctica (18 trials)
-            {mixer: 'repeat', times: 3, data: [/* ... */]},
-            // Bloque 4: Primera combinada test (36 trials)
-            {mixer: 'repeat', times: 6, data: [/* ... */]},
-            // Bloque 5: Inversión (27 trials)
-            {mixer: 'repeat', times: 13, data: [/* ... */], skip: true}, // Implementar
-            // Bloque 6: Segunda combinada práctica (18 trials)
-            {mixer: 'repeat', times: 3, data: [/* ... */]},
-            // Bloque 7: Segunda combinada test (36 trials)
-            {mixer: 'repeat', times: 6, data: [/* ... */]}
-        ];
+    function showTrial() {
+        const blocks = getBlocks();
+        if (currentTrial >= blockTrials.length) { currentBlock++; startBlock(); return; }
+        
+        const trial = blockTrials[currentTrial];
+        const stimEl = document.getElementById('stimulus');
+        
+        if (trial.isImage) {
+            stimEl.innerHTML = `<img src="${CONFIG.imageBaseURL}${trial.stimulus}">`;
+        } else {
+            stimEl.innerHTML = `<div class="word">${trial.stimulus}</div>`;
+        }
+        
+        trialStartTime = performance.now();
+        document.addEventListener('keydown', handleKey);
     }
     
-    function getConditionBBlocks() {
-        // Condición B: Mujeres+Positivo primero
-        return [
-            // Similar pero invertido
-        ];
+    function handleKey(e) {
+        if (e.key !== 'e' && e.key !== 'E' && e.key !== 'i' && e.key !== 'I') return;
+        
+        e.preventDefault();
+        document.removeEventListener('keydown', handleKey);
+        
+        const trial = blockTrials[currentTrial];
+        const side = (e.key === 'e' || e.key === 'E') ? 'left' : 'right';
+        const correct = side === trial.correctSide;
+        const rt = Math.round(performance.now() - trialStartTime);
+        
+        participant.trials.push({
+            participantID: participant.id,
+            block: trial.block,
+            trial: currentTrial + 1,
+            stimulus: trial.stimulus,
+            isImage: trial.isImage,
+            correctSide: trial.correctSide,
+            pressedKey: e.key,
+            pressedSide: side,
+            correct,
+            rt
+        });
+        
+        if (correct) {
+            currentTrial++;
+            setTimeout(showTrial, 250);
+        } else {
+            document.getElementById('error-x').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('error-x').style.display = 'none';
+                trialStartTime = performance.now();
+                document.addEventListener('keydown', handleKey);
+            }, 300);
+        }
     }
-    
-    // ========================================
-    // FINALIZAR IAT Y CALCULAR D-SCORE
-    // ========================================
     
     function finishIAT() {
-        // Obtener datos del IAT (simulado por ahora)
-        // En implementación real, se obtienen de Minno.js
+        participant.completionTime = new Date().toISOString();
+        updateProgress(95);
         
-        const trials = []; // Aquí irían los trials reales
+        const dScore = calculateDScore(participant.trials);
+        participant.dScore = dScore.d_score;
+        participant.dScoreData = dScore;
         
-        // Calcular D-score
-        const result = calculateIATScore(trials);
+        console.log('D-score:', dScore.d_score);
         
-        // Guardar resultado
-        participantData.dScore = result.d_score;
-        participantData.completionTime = new Date().toISOString();
+        if (CONFIG.googleScriptURL) {
+            fetch(CONFIG.googleScriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(participant)
+            }).catch(err => console.error(err));
+        } else {
+            console.log('Datos:', participant);
+        }
         
-        // Enviar a Google Sheets (implementar después)
-        // sendToGoogleSheets(participantData);
-        
-        // Mostrar pantalla de agradecimiento
+        updateProgress(100);
         showSection('results-section');
     }
     
-    // ========================================
-    // ENVIAR DATOS A GOOGLE SHEETS
-    // ========================================
-    
-    function sendToGoogleSheets(data) {
-        const GOOGLE_SCRIPT_URL = 'TU_URL_DE_GOOGLE_SCRIPT_AQUÍ';
+    function calculateDScore(allTrials) {
+        const trials = allTrials.filter(t => [3,4,6,7].includes(t.block));
+        let filtered = trials.filter(t => t.rt <= 10000);
         
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        })
-        .then(() => console.log('Datos enviados exitosamente'))
-        .catch(error => console.error('Error al enviar datos:', error));
+        const fastRate = trials.filter(t => t.rt < 300).length / trials.length;
+        if (fastRate > 0.10) return {valid: false, error: 'Excluido', d_score: null};
+        
+        const b3 = filtered.filter(t => t.block === 3);
+        const b4 = filtered.filter(t => t.block === 4);
+        const b6 = filtered.filter(t => t.block === 6);
+        const b7 = filtered.filter(t => t.block === 7);
+        
+        function applyPenalty(blk) {
+            const mean = blk.filter(t => t.correct).reduce((a,b) => a+b.rt, 0) / blk.filter(t => t.correct).length;
+            return blk.map(t => ({...t, rt_adj: t.correct ? t.rt : mean + 600}));
+        }
+        
+        const b3a = applyPenalty(b3), b4a = applyPenalty(b4), b6a = applyPenalty(b6), b7a = applyPenalty(b7);
+        
+        const m3 = b3a.reduce((a,b) => a+b.rt_adj, 0) / b3a.length;
+        const m4 = b4a.reduce((a,b) => a+b.rt_adj, 0) / b4a.length;
+        const m6 = b6a.reduce((a,b) => a+b.rt_adj, 0) / b6a.length;
+        const m7 = b7a.reduce((a,b) => a+b.rt_adj, 0) / b7a.length;
+        
+        function sd(trials) {
+            const mean = trials.reduce((a,b) => a+b.rt_adj, 0) / trials.length;
+            const variance = trials.reduce((a,b) => a + Math.pow(b.rt_adj - mean, 2), 0) / (trials.length - 1);
+            return Math.sqrt(variance);
+        }
+        
+        const sdp = sd([...b3a, ...b6a]);
+        const sdt = sd([...b4a, ...b7a]);
+        
+        const dp = (m6 - m3) / sdp;
+        const dt = (m7 - m4) / sdt;
+        const d = (dp + dt) / 2;
+        
+        return {valid: true, d_score: parseFloat(d.toFixed(3)), d_practice: parseFloat(dp.toFixed(3)), d_test: parseFloat(dt.toFixed(3))};
     }
     </script>
 </body>
